@@ -1,0 +1,2 @@
+BSpeed:1
+GSpeed:2
