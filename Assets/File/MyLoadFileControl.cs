@@ -7,16 +7,30 @@ public class MyLoadFileControl : MonoBehaviour
 {
     // 경로
     // Directory.GetCurrentDirectory() 는 현재 프로젝트 최상위 폴더에만 존재하는 파일 검사.
-    string filePath = Directory.GetCurrentDirectory() + "/Assets/File/MyLoadFile";
+    string filePath = Directory.GetCurrentDirectory() + "/Assets/File";
 
     // 파일이름
     string fileName = "MyLoadText.txt";
 
     void Start()
     {
-        Debug.Log(filePath);
-        Debug.Log(fileName);
-        CheckFileExist();
+        // 해당 파일의 라인을 전부 읽어온다.
+        string[] contents = File.ReadAllLines(filePath + "/" + fileName);
+        if (contents.Length > 0)
+        {
+            for (int i = 0; i < contents.Length; i++)
+            {
+                Debug.Log(contents[i]);
+                // 예로 적어둔 Text 내용이 BSpeed:1 과 같기 때문에
+                // 끝에 1자리만 숫자로 가져오면 되니까 Substring으로 가져와서 int로 다시 준다.
+                string numberArr = contents[i].Substring(contents[i].Length - 1);
+                Debug.Log(numberArr);
+                int numb = int.Parse(numberArr);
+                Debug.Log(numb);
+            }
+        }
+
+        //CheckFileExist();
     }
 
     // 경로에 해당 이름의 파일이 있는지 검사
